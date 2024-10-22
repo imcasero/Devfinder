@@ -1,3 +1,4 @@
+import { Card } from "@components/Card";
 import { Header } from "@components/Header";
 import { Seeker } from "@components/Seeker";
 import { useTheme } from "@context/themeContext";
@@ -17,6 +18,7 @@ function App() {
       <div className="flex flex-col gap-5 w-full px-4 py-5 m-auto md:w-[767px]">
         <Header />
         <Seeker />
+        <Card />
       </div>
     </main>
   );

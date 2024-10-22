@@ -1,4 +1,12 @@
+import { useTheme } from "@context/themeContext";
+import clsx from "clsx";
+
 export const Seeker = () => {
+  const { theme } = useTheme();
+  const borderColorClass =
+    theme === "dark"
+      ? "border-textSecondary-dark"
+      : "border-textSecondary-light";
   return (
     <search>
       <form>
@@ -6,7 +14,10 @@ export const Seeker = () => {
           type="text"
           name="search"
           id="search"
-          className="w-full border rounded-md border-gray-200 py-2 px-4 bg-transparent"
+          className={clsx(
+            "w-full border rounded-md py-2 px-4 bg-transparent",
+            borderColorClass
+          )}
           placeholder="Search github user... "
         />
       </form>

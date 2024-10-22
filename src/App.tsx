@@ -1,4 +1,5 @@
 import { Header } from "@components/Header";
+import { Seeker } from "@components/Seeker";
 import { useTheme } from "@context/themeContext";
 import clsx from "clsx";
 
@@ -15,6 +16,7 @@ function App() {
     >
       <div className="flex flex-col gap-5 w-full px-4 py-5 m-auto md:w-[767px]">
         <Header />
+        <Seeker />
       </div>
     </main>
   );

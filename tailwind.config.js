@@ -17,6 +17,10 @@ export default {
           light: "#4B5563",
           dark: "#9CA3AF",
         },
+        borderColor: {
+          light: "#D5D5D5",
+          dark: "#454545",
+        },
         primary: "#5664F5",
         buttonText: {
           light: "#FFFFFF",

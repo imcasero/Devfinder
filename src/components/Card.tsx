@@ -9,9 +9,7 @@ export const Card = () => {
   const buttonTextClass =
     theme === "dark" ? "text-buttonText-dark" : "text-buttonText-light";
   const borderColorClass =
-    theme === "dark"
-      ? "border-textSecondary-dark"
-      : "border-textSecondary-light";
+    theme === "dark" ? "border-borderColor-dark" : "border-borderColor-light";
   return (
     <section
       className={clsx(

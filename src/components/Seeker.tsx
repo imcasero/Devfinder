@@ -4,9 +4,7 @@ import clsx from "clsx";
 export const Seeker = () => {
   const { theme } = useTheme();
   const borderColorClass =
-    theme === "dark"
-      ? "border-textSecondary-dark"
-      : "border-textSecondary-light";
+    theme === "dark" ? "border-borderColor-dark" : "border-borderColor-light";
   return (
     <search>
       <form>

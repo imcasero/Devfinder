@@ -23,8 +23,9 @@
     /* Custom Paths */
     "paths": {
       "@components/*": ["./src/components/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@context/*": ["./src/context/*"]
+      "@context/*": ["./src/context/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@lib/*": ["./src/lib/*"]
     }
   },
   "include": ["src"]

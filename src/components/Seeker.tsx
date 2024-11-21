@@ -1,6 +1,7 @@
 import { useTheme } from "@context/themeContext";
 import clsx from "clsx";
 import { useState, FormEvent } from "react";
+import { Search } from "lucide-react";
 
 interface SeekerProps {
   setSearchTerm: (term: string) => void;
@@ -25,7 +26,13 @@ export const Seeker = ({ setSearchTerm }: SeekerProps) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        className={clsx(
+          "flex items-center gap-2 border rounded-md p-1",
+          borderColorClass
+        )}
+      >
         <input
           type="text"
           name="search"
@@ -33,11 +40,14 @@ export const Seeker = ({ setSearchTerm }: SeekerProps) => {
           value={inputValue}
           onChange={handleInputChange}
           className={clsx(
-            "w-full border rounded-md py-2 px-4 bg-transparent",
+            "flex-grow bg-transparent outline-none px-2 text-sm",
             borderColorClass
           )}
-          placeholder="Search github user... "
+          placeholder="Search github user..."
         />
+        <div className="flex items-center justify-center w-8 h-8 text-primary">
+          <Search className="w-4 h-4" />
+        </div>
       </form>
     </div>
   );

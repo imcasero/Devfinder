@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { getGithubUserByName } from "@lib/getUser.service";
 import { ErrorCard } from "@components/ErrorCard";
+import { SkeletonCard } from "@components/SkeletonCard";
 
 function App() {
   const { theme } = useTheme();
@@ -13,10 +14,12 @@ function App() {
   const [userData, setUserData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const [statusCode, setStatusCode] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
       if (searchTerm) {
+        setLoading(true);
         try {
           const user = await getGithubUserByName(searchTerm);
           setUserData(user);
@@ -27,6 +30,8 @@ function App() {
           setStatusCode(code);
           setError(err.message);
           setUserData(null);
+        } finally {
+          setLoading(false);
         }
       }
     };
@@ -49,9 +54,9 @@ function App() {
 
         {error && <ErrorCard message={error} statusCode={statusCode} />}
 
-        {!(error || userData === null) && userData && (
-          <Card userData={userData} />
-        )}
+        {loading && <SkeletonCard />}
+
+        {!loading && userData && <Card userData={userData} />}
       </div>
     </main>
   );

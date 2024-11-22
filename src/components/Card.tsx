@@ -15,6 +15,10 @@ export const Card = (props: CardProps) => {
     theme === "dark" ? "text-buttonText-dark" : "text-buttonText-light";
   const borderColorClass =
     theme === "dark" ? "border-borderColor-dark" : "border-borderColor-light";
+  const locationBadgeClass =
+    theme === "dark"
+      ? "bg-primary/40 text-primary-dark"
+      : "bg-primary/10 text-primary-light";
   return (
     <section
       className={clsx(
@@ -50,9 +54,14 @@ export const Card = (props: CardProps) => {
           <p className="text-primary font-bold">{userData.following}</p>
         </div>
       </div>
-      <div className="flex flex-col gap-1">
-        <h3>Location:</h3>
-        <p className="font-light">{userData.location}</p>
+      <div
+        className={clsx(
+          "w-fit inline-flex items-center gap-1 text-sm font-medium px-4 py-2 rounded-full",
+          locationBadgeClass
+        )}
+      >
+        <span className="text-md">📍</span>
+        <p>{userData.location || "Not available"}</p>
       </div>
       <div>
         <button

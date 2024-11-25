@@ -7,66 +7,101 @@ interface CardProps {
 }
 
 export const Card = (props: CardProps) => {
-  const userData = props.userData;
+  const { userData } = props;
   const { theme } = useTheme();
 
-  const textSecondaryClass =
-    theme === "dark" ? "text-textSecondary-dark" : "text-textSecondary-light";
-  const buttonTextClass =
-    theme === "dark" ? "text-buttonText-dark" : "text-buttonText-light";
-  const borderColorClass =
-    theme === "dark" ? "border-borderColor-dark" : "border-borderColor-light";
-  const locationBadgeClass =
-    theme === "dark"
-      ? "bg-primary/40 text-primary-dark"
-      : "bg-primary/10 text-primary-light";
+  const isDarkTheme = theme === "dark";
+
+  const textPrimaryClass = isDarkTheme ? "text-white" : "text-gray-900";
+  const textSecondaryClass = isDarkTheme ? "text-gray-400" : "text-gray-600";
+  const cardBgClass = isDarkTheme ? "bg-gray-800" : "bg-white";
+  const borderColorClass = isDarkTheme ? "border-gray-700" : "border-gray-300";
+  const locationBadgeClass = isDarkTheme
+    ? "bg-primary/40 text-primary-dark"
+    : "bg-primary/10 text-primary-light";
+
   return (
     <section
       className={clsx(
-        "w-full p-5 border rounded-md flex flex-col gap-6 transition-all duration-300",
+        "w-full p-6 border rounded-lg shadow-sm transition-all duration-300",
+        cardBgClass,
         borderColorClass
       )}
     >
-      <div className="w-full flex flex-row gap-2">
+      {/* Header Section */}
+      <div className="flex items-center gap-4">
         <img
           src={userData.avatar_url}
-          className="rounded-full bg-gray-200 w-20 h-20"
+          alt={`${userData.name}'s avatar`}
+          className="rounded-full w-20 h-20 object-cover border border-gray-200"
         />
-
-        <div className="flex flex-col justify-center">
-          <h2 className="text-base font-medium">{userData.name}</h2>
-          <p className={clsx("text-base", textSecondaryClass)}>
+        <div className="flex flex-col">
+          <h2
+            className={clsx(
+              "text-lg font-semibold leading-tight",
+              textPrimaryClass
+            )}
+          >
+            {userData.name}
+          </h2>
+          <p className={clsx("text-sm font-medium", textSecondaryClass)}>
             @{userData.login}
           </p>
         </div>
       </div>
-      <p className="text-sm font-normal">{userData.bio}</p>
-      <div className="flex flex-row justify-between ">
-        <div className="flex flex-col gap-2">
-          <h3>Repositories</h3>
-          <p className="text-primary font-bold">{userData.public_repos}</p>
+
+      {/* Bio Section */}
+      {userData.bio && (
+        <p className={clsx("mt-4 text-sm leading-relaxed", textSecondaryClass)}>
+          {userData.bio}
+        </p>
+      )}
+
+      {/* Stats Section */}
+      <div className="mt-6 flex justify-between items-center">
+        <div className="text-center">
+          <h3 className={clsx("text-sm font-medium", textSecondaryClass)}>
+            Repositories
+          </h3>
+          <p className={clsx("text-lg font-bold text-primary")}>
+            {userData.public_repos}
+          </p>
         </div>
-        <div className="flex flex-col gap-2">
-          <h3>Followers</h3>
-          <p className="text-primary font-bold">{userData.followers}</p>
+        <div className="text-center">
+          <h3 className={clsx("text-sm font-medium", textSecondaryClass)}>
+            Followers
+          </h3>
+          <p className={clsx("text-lg font-bold text-primary")}>
+            {userData.followers}
+          </p>
         </div>
-        <div className="flex flex-col gap-2">
-          <h3>Following</h3>
-          <p className="text-primary font-bold">{userData.following}</p>
+        <div className="text-center">
+          <h3 className={clsx("text-sm font-medium", textSecondaryClass)}>
+            Following
+          </h3>
+          <p className={clsx("text-lg font-bold text-primary")}>
+            {userData.following}
+          </p>
         </div>
       </div>
+
+      {/* Location Badge */}
       <div
         className={clsx(
-          "w-fit inline-flex items-center gap-1 text-sm font-medium px-4 py-2 rounded-full",
+          "mt-6 inline-flex items-center gap-2 text-sm font-medium px-3 py-1.5 rounded-full",
           locationBadgeClass
         )}
       >
-        <span className="text-md">📍</span>
+        <span className="text-lg">📍</span>
         <p>{userData.location || "Not available"}</p>
       </div>
-      <div>
+
+      {/* Button */}
+      <div className="mt-6">
         <button
-          className={clsx("py-2 px-4 bg-primary rounded-md", buttonTextClass)}
+          className={clsx(
+            "w-full py-2 px-4 text-sm font-semibold rounded-md bg-primary hover:bg-primary/90 transition-colors duration-200 text-white"
+          )}
           onClick={() => {
             window.open(userData.html_url, "_blank");
           }}

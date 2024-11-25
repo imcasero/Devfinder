@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { getGithubUserByName } from "@lib/getUser.service";
 import { ErrorCard } from "@components/ErrorCard";
 import { SkeletonCard } from "@components/SkeletonCard";
+import { Footer } from "@components/Footer";
 
 function App() {
   const { theme } = useTheme();
@@ -42,14 +43,14 @@ function App() {
   return (
     <main
       className={clsx(
-        "min-h-screen",
+        "min-h-screen flex flex-col",
         theme === "dark"
           ? "bg-background-dark text-textPrimary-dark"
           : "bg-background-light text-textPrimary-light"
       )}
     >
-      <div className="flex flex-col gap-5 w-full px-4 py-5 m-auto md:w-[767px]">
-        <Header />
+      <div className="flex flex-col gap-5 w-full px-4 py-5 m-auto md:w-[767px] flex-grow">
+        <Header setUserData={setUserData} />
         <Seeker setSearchTerm={setSearchTerm} />
 
         {error && <ErrorCard message={error} statusCode={statusCode} />}
@@ -58,6 +59,8 @@ function App() {
 
         {!loading && userData && <Card userData={userData} />}
       </div>
+
+      <Footer />
     </main>
   );
 }

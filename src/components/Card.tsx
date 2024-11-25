@@ -1,8 +1,9 @@
 import { useTheme } from "@context/themeContext";
 import clsx from "clsx";
+import { GithubUser } from "../interfaces/GithubUser";
 
 interface CardProps {
-  userData: any;
+  userData: GithubUser;
 }
 
 export const Card = (props: CardProps) => {

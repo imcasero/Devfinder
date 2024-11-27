@@ -10,7 +10,7 @@ export const SkeletonCard = () => {
   return (
     <section
       className={clsx(
-        "w-full p-5 border rounded-md flex flex-col gap-6 transition-all duration-300",
+        "w-full p-5 border rounded-md flex flex-col gap-6 transition-all duration-300 bg-transparent",
         skeletonBgClass
       )}
     >

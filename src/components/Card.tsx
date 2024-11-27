@@ -23,8 +23,8 @@ export const Card = (props: CardProps) => {
   return (
     <section
       className={clsx(
-        "w-full p-6 border rounded-lg shadow-sm transition-all duration-300",
-        cardBgClass,
+        "w-full p-6 border rounded-lg shadow-sm transition-all duration-300 bg-transparent",
+
         borderColorClass
       )}
     >

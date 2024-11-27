@@ -14,7 +14,7 @@ export const Card = (props: CardProps) => {
 
   const textPrimaryClass = isDarkTheme ? "text-white" : "text-gray-900";
   const textSecondaryClass = isDarkTheme ? "text-gray-400" : "text-gray-600";
-  const cardBgClass = isDarkTheme ? "bg-gray-800" : "bg-white";
+
   const borderColorClass = isDarkTheme ? "border-gray-700" : "border-gray-300";
   const locationBadgeClass = isDarkTheme
     ? "bg-primary/40 text-primary-dark"

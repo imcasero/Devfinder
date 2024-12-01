@@ -11,6 +11,7 @@ import { useTheme } from "@context/themeContext";
 import clsx from "clsx";
 import { Home } from "@pages/Home";
 import { Response } from "@pages/Response";
+import { Toaster } from "@pheralb/toast";
 
 function Layout() {
   return (
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <Router>
+      <Toaster position="top-center" theme={theme} />
       <div
         className={clsx(
           "min-h-screen flex flex-col",

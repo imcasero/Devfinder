@@ -1,34 +1,42 @@
 import { useTheme } from "@context/themeContext";
 import clsx from "clsx";
 import { GithubUser } from "../interfaces/GithubUser";
+import { Copy, SquareArrowOutUpRight } from "lucide-react";
+import { toast } from "@pheralb/toast";
 
 interface CardProps {
   userData: GithubUser;
 }
 
-export const Card = (props: CardProps) => {
-  const { userData } = props;
+const getThemeClasses = (theme: string) => ({
+  textPrimary: theme === "dark" ? "text-white" : "text-gray-900",
+  textSecondary: theme === "dark" ? "text-gray-400" : "text-gray-600",
+  borderColor: theme === "dark" ? "border-gray-700" : "border-gray-300",
+  locationBadge:
+    theme === "dark"
+      ? "bg-primary/40 text-primary-dark"
+      : "bg-primary/10 text-primary-light",
+});
+
+export const Card = ({ userData }: CardProps) => {
   const { theme } = useTheme();
+  const { textPrimary, textSecondary, borderColor, locationBadge } =
+    getThemeClasses(theme);
 
-  const isDarkTheme = theme === "dark";
-
-  const textPrimaryClass = isDarkTheme ? "text-white" : "text-gray-900";
-  const textSecondaryClass = isDarkTheme ? "text-gray-400" : "text-gray-600";
-
-  const borderColorClass = isDarkTheme ? "border-gray-700" : "border-gray-300";
-  const locationBadgeClass = isDarkTheme
-    ? "bg-primary/40 text-primary-dark"
-    : "bg-primary/10 text-primary-light";
+  const copyToClipboard = () => {
+    navigator.clipboard
+      .writeText(window.location.href)
+      .then(() => toast.success({ text: "URL copied to clipboard!" }))
+      .catch(() => toast.error({ text: "Something went wrong" }));
+  };
 
   return (
     <section
       className={clsx(
-        "w-full p-6 border rounded-lg shadow-sm transition-all duration-300 bg-transparent",
-
-        borderColorClass
+        "w-full p-6 border rounded-lg shadow-sm bg-transparent",
+        borderColor
       )}
     >
-      {/* Header Section */}
       <div className="flex items-center gap-4">
         <img
           src={userData.avatar_url}
@@ -37,76 +45,61 @@ export const Card = (props: CardProps) => {
         />
         <div className="flex flex-col">
           <h2
-            className={clsx(
-              "text-lg font-semibold leading-tight",
-              textPrimaryClass
-            )}
+            className={clsx("text-lg font-semibold leading-tight", textPrimary)}
           >
             {userData.name}
           </h2>
-          <p className={clsx("text-sm font-medium", textSecondaryClass)}>
+          <p className={clsx("text-sm font-medium", textSecondary)}>
             @{userData.login}
           </p>
         </div>
       </div>
 
-      {/* Bio Section */}
       {userData.bio && (
-        <p className={clsx("mt-4 text-sm leading-relaxed", textSecondaryClass)}>
+        <p className={clsx("mt-4 text-sm leading-relaxed", textSecondary)}>
           {userData.bio}
         </p>
       )}
 
-      {/* Stats Section */}
       <div className="mt-6 flex justify-between items-center">
-        <div className="text-center">
-          <h3 className={clsx("text-sm font-medium", textSecondaryClass)}>
-            Repositories
-          </h3>
-          <p className={clsx("text-lg font-bold text-primary")}>
-            {userData.public_repos}
-          </p>
-        </div>
-        <div className="text-center">
-          <h3 className={clsx("text-sm font-medium", textSecondaryClass)}>
-            Followers
-          </h3>
-          <p className={clsx("text-lg font-bold text-primary")}>
-            {userData.followers}
-          </p>
-        </div>
-        <div className="text-center">
-          <h3 className={clsx("text-sm font-medium", textSecondaryClass)}>
-            Following
-          </h3>
-          <p className={clsx("text-lg font-bold text-primary")}>
-            {userData.following}
-          </p>
-        </div>
+        {["public_repos", "followers", "following"].map((key) => (
+          <div className="text-center" key={key}>
+            <h3 className={clsx("text-sm font-medium", textSecondary)}>
+              {key.replace("_", " ").toUpperCase()}
+            </h3>
+            <p className={clsx("text-lg font-bold text-primary")}>
+              {userData[key as keyof GithubUser]}
+            </p>{" "}
+            {/* Aquí estamos asegurando el tipo */}
+          </div>
+        ))}
       </div>
 
-      {/* Location Badge */}
       <div
         className={clsx(
           "mt-6 inline-flex items-center gap-2 text-sm font-medium px-3 py-1.5 rounded-full",
-          locationBadgeClass
+          locationBadge
         )}
       >
         <span className="text-lg">📍</span>
         <p>{userData.location || "Not available"}</p>
       </div>
 
-      {/* Button */}
-      <div className="mt-6">
+      <div className="mt-6 flex gap-6">
         <button
-          className={clsx(
-            "w-full py-2 px-4 text-sm font-semibold rounded-md bg-primary hover:bg-primary/90 transition-colors duration-200 text-white"
-          )}
-          onClick={() => {
-            window.open(userData.html_url, "_blank");
-          }}
+          className="w-full py-2 px-4 text-sm font-semibold rounded-md bg-primary hover:bg-primary/90 text-white flex justify-center items-center gap-2"
+          onClick={() => window.open(userData.html_url, "_blank")}
         >
-          View Profile
+          <SquareArrowOutUpRight width={20} />
+          <p>View Profile</p>
+        </button>
+
+        <button
+          className="w-full py-2 px-4 text-sm font-semibold rounded-md border border-primary text-primary flex justify-center items-center gap-2 hover:bg-slate-100/50"
+          onClick={copyToClipboard}
+        >
+          <Copy width={20} />
+          <p>Share</p>
         </button>
       </div>
     </section>

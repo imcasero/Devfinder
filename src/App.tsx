@@ -1,67 +1,50 @@
-import { Card } from "@components/Card";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom";
+
 import { Header } from "@components/Header";
-import { Seeker } from "@components/Seeker";
+import { Footer } from "@components/Footer";
 import { useTheme } from "@context/themeContext";
 import clsx from "clsx";
-import { useEffect, useState } from "react";
-import { getGithubUserByName } from "@lib/getUser.service";
-import { ErrorCard } from "@components/ErrorCard";
-import { SkeletonCard } from "@components/SkeletonCard";
-import { Footer } from "@components/Footer";
+import { Home } from "@pages/Home";
+import { Response } from "@pages/Response";
+
+function Layout() {
+  return (
+    <div className="flex flex-col gap-6 flex-grow w-full px-4 py-5 md:w-[767px] m-auto">
+      <Header />
+      <Outlet />
+    </div>
+  );
+}
 
 function App() {
   const { theme } = useTheme();
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [userData, setUserData] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [statusCode, setStatusCode] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (searchTerm) {
-        setLoading(true);
-        try {
-          const user = await getGithubUserByName(searchTerm);
-          setUserData(user);
-          setError(null);
-          setStatusCode(null);
-        } catch (err: any) {
-          const code = err.message.match(/Error (\d+):/)?.[1];
-          setStatusCode(code);
-          setError(err.message);
-          setUserData(null);
-        } finally {
-          setLoading(false);
-        }
-      }
-    };
-
-    fetchData();
-  }, [searchTerm]);
 
   return (
-    <main
-      className={clsx(
-        "min-h-screen flex flex-col",
-        theme === "dark"
-          ? "bg-background-dark text-textPrimary-dark"
-          : "bg-background-light text-textPrimary-light"
-      )}
-    >
-      <div className="flex flex-col gap-5 w-full px-4 py-5 m-auto md:w-[767px] flex-grow">
-        <Header setUserData={setUserData} />
-        <Seeker setSearchTerm={setSearchTerm} />
-
-        {error && <ErrorCard message={error} statusCode={statusCode} />}
-
-        {loading && <SkeletonCard />}
-
-        {!loading && userData && <Card userData={userData} />}
+    <Router>
+      <div
+        className={clsx(
+          "min-h-screen flex flex-col",
+          theme === "dark"
+            ? "bg-background-dark text-textPrimary-dark"
+            : "bg-background-light text-textPrimary-light"
+        )}
+      >
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path=":username" element={<Response />} />
+            </Route>
+          </Routes>
+        </main>
+        <Footer />
       </div>
-
-      <Footer />
-    </main>
+    </Router>
   );
 }
 

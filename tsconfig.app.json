@@ -25,7 +25,8 @@
       "@components/*": ["./src/components/*"],
       "@context/*": ["./src/context/*"],
       "@assets/*": ["./src/assets/*"],
-      "@lib/*": ["./src/lib/*"]
+      "@lib/*": ["./src/lib/*"],
+      "@pages/*": ["./src/pages/*"]
     }
   },
   "include": ["src"]

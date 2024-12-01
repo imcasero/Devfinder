@@ -1,20 +1,17 @@
 import { useTheme } from "@context/themeContext";
 import { Sun, Moon } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
+import { useNavigate } from "react-router-dom";
 
-interface HeaderProps {
-  setUserData: Dispatch<SetStateAction<any>>;
-}
-
-export const Header: React.FC<HeaderProps> = ({ setUserData }) => {
+export const Header: React.FC = () => {
   const { toggleTheme, theme } = useTheme();
+  const navigate = useNavigate();
 
   return (
     <header className="w-full flex justify-between align-middle">
       <h1
-        className="font-bold text-xl text-primary flex justify-center align-middle"
+        className="font-bold text-xl text-primary flex justify-center align-middle cursor-pointer"
         onClick={() => {
-          setUserData(null);
+          navigate(`/`);
         }}
       >
         DevFinder

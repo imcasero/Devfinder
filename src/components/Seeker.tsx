@@ -32,6 +32,7 @@ export const Seeker = ({ setSearchTerm }: SeekerProps) => {
           "flex items-center gap-2 border rounded-md p-1",
           borderColorClass
         )}
+        id="searchForm"
       >
         <input
           type="text"
@@ -45,7 +46,15 @@ export const Seeker = ({ setSearchTerm }: SeekerProps) => {
           )}
           placeholder="Search github user..."
         />
-        <div className="flex items-center justify-center w-8 h-8 text-primary">
+        <div
+          className="flex items-center justify-center w-8 h-8 text-primary cursor-pointer"
+          onClick={() => {
+            const form = document.getElementById(
+              "searchForm"
+            ) as HTMLFormElement;
+            form?.requestSubmit();
+          }}
+        >
           <Search className="w-4 h-4" />
         </div>
       </form>

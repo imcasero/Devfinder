@@ -30,12 +30,10 @@ export const Response = () => {
           setUserData(user);
           setError(null);
           setStatusCode(null);
-          const currentUrl = window.location.origin;
           const storedUser = createStoredUser(
             user.avatar_url,
             user.login,
-            user.name ? user.name : "",
-            currentUrl
+            user.name ? user.name : ""
           );
           addUserToStorage(storedUser);
         } catch (err: any) {

@@ -38,7 +38,7 @@ export const addUserToStorage = (user: StoredUser) => {
   currentUsers.unshift(user);
 
   // Limit the array length to the 4 most recent searches.
-  if (currentUsers.length > 4) {
+  if (currentUsers.length > 10) {
     currentUsers.pop(); // Remove the oldest entry.
   }
 
@@ -53,21 +53,18 @@ export const addUserToStorage = (user: StoredUser) => {
  * @param {string} avatar_url - The URL of the user's avatar image.
  * @param {string} login - The GitHub username of the user.
  * @param {string} name - The full name of the user.
- * @param {string} currentUrl - The current URL of the page, used to generate the full profile URL.
  *
  * @returns {StoredUser} - A user object containing avatar_url, login, name, and html_url.
  */
 export const createStoredUser = (
   avatar_url: string,
   login: string,
-  name: string,
-  currentUrl: string
+  name: string
 ): StoredUser => {
   return {
     avatar_url,
     login,
     name,
-    html_url: `${currentUrl}/${login}`, // Generates the full profile URL based on the current URL.
   };
 };
 

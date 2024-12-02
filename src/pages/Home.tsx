@@ -37,7 +37,6 @@ export const Home = () => {
                 avatar_url={user.avatar_url}
                 login={user.login}
                 name={user.name}
-                html_url={user.html_url}
               />
             ))}
           </ul>

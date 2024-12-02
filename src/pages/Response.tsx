@@ -5,6 +5,7 @@ import { Seeker } from "@components/Seeker";
 import { Card } from "@components/Card";
 import { ErrorCard } from "@components/ErrorCard";
 import { SkeletonCard } from "@components/SkeletonCard";
+import { addUserToStorage, createStoredUser } from "@lib/storageUser.service";
 
 export const Response = () => {
   const { username } = useParams<{ username: string }>();
@@ -29,6 +30,14 @@ export const Response = () => {
           setUserData(user);
           setError(null);
           setStatusCode(null);
+          const currentUrl = window.location.origin;
+          const storedUser = createStoredUser(
+            user.avatar_url,
+            user.login,
+            user.name ? user.name : "",
+            currentUrl
+          );
+          addUserToStorage(storedUser);
         } catch (err: any) {
           const code = err.message.match(/Error (\d+):/)?.[1];
           setStatusCode(code);

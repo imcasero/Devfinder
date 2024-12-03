@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import { StoredUser } from "../interfaces/StoredUser";
 import { useTheme } from "@context/themeContext";
@@ -11,22 +10,19 @@ const getThemeClasses = (theme: string) => ({
 });
 
 export const SimpleCard = (user: StoredUser) => {
-  const navigate = useNavigate();
   const { theme } = useTheme();
   const { textPrimary, textSecondary, borderColor, hoverBg } =
     getThemeClasses(theme);
 
   return (
-    <li
+    <a
       key={user.login}
+      href={`/${user.login}`}
       className={clsx(
-        "flex items-center gap-4 border rounded-lg shadow-md px-5 py-3 w-fit cursor-pointer transition-all duration-200",
+        "flex items-center gap-4 border rounded-lg shadow-md px-5 py-3 w-fit transition-all duration-200",
         borderColor,
         hoverBg
       )}
-      onClick={() => {
-        navigate(user.login);
-      }}
     >
       <img
         src={user.avatar_url}
@@ -39,6 +35,6 @@ export const SimpleCard = (user: StoredUser) => {
         </h3>
         <p className={clsx("text-sm", textSecondary)}>@{user.login}</p>
       </div>
-    </li>
+    </a>
   );
 };

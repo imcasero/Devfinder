@@ -30,7 +30,7 @@ function App() {
       <Toaster position="top-center" theme={theme} />
       <div
         className={clsx(
-          "min-h-screen flex flex-col",
+          "min-h-screen flex flex-col transition-colors duration-200",
           theme === "dark"
             ? "bg-background-dark text-textPrimary-dark"
             : "bg-background-light text-textPrimary-light"

@@ -86,19 +86,21 @@ export const Card = ({ userData }: CardProps) => {
       </div>
 
       <div className="mt-6 flex gap-6">
-        <button
-          className="w-full py-2 px-4 text-sm font-semibold rounded-md bg-primary hover:bg-primary/90 text-white flex justify-center items-center gap-2"
-          onClick={() => window.open(userData.html_url, "_blank")}
+        <a
+          className="w-full py-2 px-4 text-sm font-semibold rounded-md bg-primary hover:bg-primary/90 text-white flex justify-center items-center gap-2 transition-colors duration-200"
+          href={userData.html_url}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <SquareArrowOutUpRight width={20} />
           <p>View Profile</p>
-        </button>
+          <SquareArrowOutUpRight size={15} />
+        </a>
 
         <button
-          className="w-full py-2 px-4 text-sm font-semibold rounded-md border border-primary text-primary flex justify-center items-center gap-2 hover:bg-slate-100/50"
+          className="w-full py-2 px-4 text-sm font-semibold rounded-md border border-primary text-primary flex justify-center items-center gap-2 hover:bg-white/10 transition-colors duration-200"
           onClick={copyToClipboard}
         >
-          <Copy width={20} />
+          <Copy size={15} />
           <p>Share</p>
         </button>
       </div>

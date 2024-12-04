@@ -28,9 +28,9 @@ export const Home = () => {
               theme === "dark" ? "text-white" : "text-gray-900"
             )}
           >
-            Recent Searches
+            Recent Searches:
           </h2>
-          <ul className="flex flex-wrap gap-4">
+          <ul className="flex flex-wrap gap-4 justify-center">
             {recentUsers.map((user: StoredUser, index: number) => (
               <SimpleCard
                 key={index}

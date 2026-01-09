@@ -20,7 +20,7 @@ const getThemeClasses = (theme: string) => ({
 
 export const Card = ({ userData }: CardProps) => {
   const { theme } = useTheme();
-  const { textPrimary, textSecondary, borderColor, locationBadge } =
+  const { textPrimary, textSecondary } =
     getThemeClasses(theme);
 
   const copyToClipboard = () => {
@@ -33,19 +33,23 @@ export const Card = ({ userData }: CardProps) => {
   return (
     <section
       className={clsx(
-        "w-full p-6 border rounded-lg shadow-sm bg-transparent",
-        borderColor
+        "w-full p-6 rounded-xl shadow-lg animate-slide-up transition-all duration-300 hover:shadow-xl",
+        theme === "dark"
+          ? "bg-slate-800/95 border border-slate-700"
+          : "bg-white border border-gray-200"
       )}
     >
       <div className="flex items-center gap-4">
-        <img
-          src={userData.avatar_url}
-          alt={`${userData.name}'s avatar`}
-          className="rounded-full w-20 h-20 object-cover border border-gray-200"
-        />
+        <div className="relative">
+          <img
+            src={userData.avatar_url}
+            alt={`${userData.name}'s avatar`}
+            className="rounded-full w-20 h-20 object-cover ring-2 ring-primary/20 transition-transform duration-300 hover:scale-105"
+          />
+        </div>
         <div className="flex flex-col">
           <h2
-            className={clsx("text-lg font-semibold leading-tight", textPrimary)}
+            className={clsx("text-xl font-bold leading-tight", textPrimary)}
           >
             {userData.name}
           </h2>
@@ -61,47 +65,68 @@ export const Card = ({ userData }: CardProps) => {
         </p>
       )}
 
-      <div className="mt-6 flex justify-between items-center">
-        {["public_repos", "followers", "following"].map((key) => (
-          <div className="text-center" key={key}>
-            <h3 className={clsx("text-sm font-medium", textSecondary)}>
-              {key.replace("_", " ").toUpperCase()}
+      <div className="mt-6 grid grid-cols-3 gap-4">
+        {["public_repos", "followers", "following"].map((key, index) => (
+          <div
+            className={clsx(
+              "text-center p-4 rounded-lg transition-all duration-200 hover:scale-105",
+              theme === "dark"
+                ? "bg-slate-700/50 border border-slate-600/50"
+                : "bg-gray-50 border border-gray-200"
+            )}
+            key={key}
+            style={{ animationDelay: `${index * 50}ms` }}
+          >
+            <h3 className={clsx("text-xs font-semibold uppercase tracking-wide mb-1", textSecondary)}>
+              {key.replace("_", " ")}
             </h3>
-            <p className={clsx("text-lg font-bold text-primary")}>
+            <p className={clsx("text-2xl font-bold text-primary")}>
               {userData[key as keyof GithubUser]}
-            </p>{" "}
-            {/* Aquí estamos asegurando el tipo */}
+            </p>
           </div>
         ))}
       </div>
 
-      <div
-        className={clsx(
-          "mt-6 inline-flex items-center gap-2 text-sm font-medium px-3 py-1.5 rounded-full",
-          locationBadge
-        )}
-      >
-        <span className="text-lg">📍</span>
-        <p>{userData.location || "Not available"}</p>
-      </div>
+      {userData.location && (
+        <div
+          className={clsx(
+            "mt-5 inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg",
+            theme === "dark"
+              ? "bg-slate-700/30 border border-slate-600/30"
+              : "bg-gray-50 border border-gray-200"
+          )}
+        >
+          <span className="text-base">📍</span>
+          <p className={textPrimary}>{userData.location}</p>
+        </div>
+      )}
 
-      <div className="mt-6 flex gap-6">
+      <div className="mt-6 flex gap-3">
         <a
-          className="w-full py-2 px-4 text-sm font-semibold rounded-md bg-primary hover:bg-primary/90 text-white flex justify-center items-center gap-2 transition-colors duration-200"
+          className="group flex-1 py-3 px-4 text-sm font-semibold rounded-lg bg-primary hover:bg-primary/90 text-white transition-all duration-200 hover:shadow-lg"
           href={userData.html_url}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <p>View Profile</p>
-          <SquareArrowOutUpRight size={15} />
+          <div className="flex justify-center items-center gap-2">
+            <p>View Profile</p>
+            <SquareArrowOutUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </div>
         </a>
 
         <button
-          className="w-full py-2 px-4 text-sm font-semibold rounded-md border border-primary text-primary flex justify-center items-center gap-2 hover:bg-white/10 transition-colors duration-200"
+          className={clsx(
+            "group flex-1 py-3 px-4 text-sm font-semibold rounded-lg border transition-all duration-200 hover:shadow-md",
+            theme === "dark"
+              ? "bg-slate-700/50 border-slate-600 hover:bg-slate-700 text-white"
+              : "bg-white border-gray-300 hover:bg-gray-50 text-gray-900"
+          )}
           onClick={copyToClipboard}
         >
-          <Copy size={15} />
-          <p>Share</p>
+          <div className="flex justify-center items-center gap-2">
+            <Copy size={16} className="group-hover:scale-110 transition-transform" />
+            <p>Share</p>
+          </div>
         </button>
       </div>
     </section>

@@ -11,14 +11,8 @@ interface ErrorCardProps {
 export const ErrorCard = ({ message, statusCode }: ErrorCardProps) => {
   const { theme } = useTheme();
 
-  const backgroundClass =
-    theme === "dark" ? "bg-background-dark" : "bg-background-light";
-  const textPrimaryClass =
-    theme === "dark" ? "text-textPrimary-dark" : "text-textPrimary-light";
   const textSecondaryClass =
     theme === "dark" ? "text-textSecondary-dark" : "text-textSecondary-light";
-  const borderColorClass =
-    theme === "dark" ? "border-borderColor-dark" : "border-borderColor-light";
 
   const errorTitle =
     statusCode === "404" ? "User Not Found" : "Unexpected Error";
@@ -30,10 +24,10 @@ export const ErrorCard = ({ message, statusCode }: ErrorCardProps) => {
   return (
     <div
       className={clsx(
-        "w-full p-6 border rounded-md flex flex-col gap-4 justify-center items-center",
-        backgroundClass,
-        textPrimaryClass,
-        borderColorClass
+        "w-full p-8 rounded-xl shadow-lg border flex flex-col gap-4 justify-center items-center animate-slide-up",
+        theme === "dark"
+          ? "bg-slate-800 border-slate-700"
+          : "bg-white border-gray-200"
       )}
     >
       <div className="flex flex-col items-center">
@@ -41,13 +35,19 @@ export const ErrorCard = ({ message, statusCode }: ErrorCardProps) => {
           <img
             src={UserNotFoundIcon}
             alt="User Not Found"
-            className="w-16 h-16 mb-4"
+            className="w-20 h-20 mb-4"
           />
         ) : (
-          <img src={ErrorIcon} alt="Error Icon" className="w-16 h-16 mb-4" />
+          <img
+            src={ErrorIcon}
+            alt="Error Icon"
+            className="w-20 h-20 mb-4"
+          />
         )}
-        <h2 className="text-xl font-semibold mt-2">{errorTitle}</h2>
-        <p className={clsx("text-base text-center mt-2", textSecondaryClass)}>
+        <h2 className={clsx("text-xl font-bold mt-2", theme === "dark" ? "text-white" : "text-gray-900")}>
+          {errorTitle}
+        </h2>
+        <p className={clsx("text-sm text-center mt-3 max-w-md leading-relaxed", textSecondaryClass)}>
           {errorMessage}
         </p>
       </div>

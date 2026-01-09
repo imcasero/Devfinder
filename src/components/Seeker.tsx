@@ -10,9 +10,7 @@ interface SeekerProps {
 export const Seeker = ({ setSearchTerm }: SeekerProps) => {
   const { theme } = useTheme();
   const [inputValue, setInputValue] = useState("");
-
-  const borderColorClass =
-    theme === "dark" ? "border-borderColor-dark" : "border-borderColor-light";
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,38 +23,44 @@ export const Seeker = ({ setSearchTerm }: SeekerProps) => {
   };
 
   return (
-    <div>
+    <div className="animate-slide-down">
       <form
         onSubmit={handleSubmit}
         className={clsx(
-          "flex items-center gap-2 border rounded-md p-1",
-          borderColorClass
+          "flex items-center gap-3 rounded-xl p-3 shadow-md transition-all duration-200",
+          isFocused && "ring-2 ring-primary/30 shadow-lg",
+          theme === "dark"
+            ? "bg-slate-800 border border-slate-700"
+            : "bg-white border border-gray-200"
         )}
         id="searchForm"
       >
+        <Search
+          className={clsx(
+            "w-5 h-5 transition-colors duration-200",
+            isFocused ? "text-primary" : theme === "dark" ? "text-gray-400" : "text-gray-500"
+          )}
+        />
         <input
           type="text"
           name="search"
           id="search"
           value={inputValue}
           onChange={handleInputChange}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
           className={clsx(
-            "flex-grow bg-transparent outline-none px-2 text-sm",
-            borderColorClass
+            "flex-grow bg-transparent outline-none px-2 text-sm font-medium placeholder:font-normal",
+            theme === "dark" ? "text-white placeholder:text-gray-500" : "text-gray-900 placeholder:text-gray-400"
           )}
-          placeholder="Search github user..."
+          placeholder="Search GitHub user..."
         />
-        <div
-          className="flex items-center justify-center w-8 h-8 text-primary cursor-pointer"
-          onClick={() => {
-            const form = document.getElementById(
-              "searchForm"
-            ) as HTMLFormElement;
-            form?.requestSubmit();
-          }}
+        <button
+          type="submit"
+          className="px-5 py-2 rounded-lg font-semibold text-white text-sm bg-primary hover:bg-primary/90 transition-all duration-200 hover:shadow-md"
         >
-          <Search className="w-4 h-4" />
-        </div>
+          Search
+        </button>
       </form>
     </div>
   );

@@ -30,13 +30,25 @@ function App() {
       <Toaster position="top-center" theme={theme} />
       <div
         className={clsx(
-          "min-h-screen flex flex-col transition-colors duration-200",
+          "min-h-screen flex flex-col transition-colors duration-200 relative overflow-hidden",
           theme === "dark"
             ? "bg-background-dark text-textPrimary-dark"
             : "bg-background-light text-textPrimary-light"
         )}
       >
-        <main className="flex-grow">
+        {/* Subtle background gradient */}
+        <div className="fixed inset-0 -z-10">
+          <div
+            className={clsx(
+              "absolute inset-0",
+              theme === "dark"
+                ? "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
+                : "bg-gradient-to-br from-gray-50 via-white to-gray-100"
+            )}
+          ></div>
+        </div>
+
+        <main className="flex-grow relative z-10">
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />

@@ -42,7 +42,7 @@ function App() {
             className={clsx(
               "absolute inset-0",
               theme === "dark"
-                ? "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
+                ? "bg-gradient-to-br from-black via-neutral-950 to-black"
                 : "bg-gradient-to-br from-gray-50 via-white to-gray-100"
             )}
           ></div>

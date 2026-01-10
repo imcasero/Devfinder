@@ -10,7 +10,10 @@ export const Header: React.FC = () => {
   return (
     <header className="w-full flex justify-between items-center animate-slide-down mb-2">
       <h1
-        className="font-bold text-2xl flex items-center cursor-pointer text-primary hover:opacity-80 transition-opacity"
+        className={clsx(
+          "font-bold text-2xl flex items-center cursor-pointer hover:opacity-80 transition-opacity",
+          theme === "dark" ? "text-white" : "text-primary"
+        )}
         onClick={() => {
           navigate(`/`);
         }}
@@ -21,7 +24,7 @@ export const Header: React.FC = () => {
         className={clsx(
           "group flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 hover:scale-105",
           theme === "dark"
-            ? "bg-slate-800 border border-slate-700 hover:border-slate-600"
+            ? "bg-neutral-900 border border-neutral-800 hover:border-neutral-700"
             : "bg-white border border-gray-200 hover:border-gray-300"
         )}
         onClick={() => {

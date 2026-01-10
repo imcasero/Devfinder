@@ -5,14 +5,14 @@ export const SkeletonCard = () => {
   const { theme } = useTheme();
 
   const skeletonBgClass =
-    theme === "dark" ? "bg-slate-700/50" : "bg-gray-200";
+    theme === "dark" ? "bg-neutral-700/50" : "bg-gray-200";
 
   return (
     <section
       className={clsx(
         "w-full p-6 rounded-xl shadow-lg border flex flex-col gap-6 animate-slide-up",
         theme === "dark"
-          ? "bg-slate-800/95 border-slate-700"
+          ? "bg-neutral-800/95 border-neutral-700"
           : "bg-white border-gray-200"
       )}
     >
@@ -60,7 +60,7 @@ export const SkeletonCard = () => {
               className={clsx(
                 "p-4 rounded-lg",
                 theme === "dark"
-                  ? "bg-slate-700/50 border border-slate-600/50"
+                  ? "bg-neutral-700/50 border border-neutral-600/50"
                   : "bg-gray-50 border border-gray-200"
               )}
             >
@@ -85,7 +85,7 @@ export const SkeletonCard = () => {
         className={clsx(
           "w-fit inline-flex items-center gap-2 px-4 py-2 rounded-lg",
           theme === "dark"
-            ? "bg-slate-700/30 border border-slate-600/30"
+            ? "bg-neutral-700/30 border border-neutral-600/30"
             : "bg-gray-50 border border-gray-200"
         )}
       >

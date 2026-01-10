@@ -4,7 +4,7 @@ import { useTheme } from "@context/themeContext";
 
 const getThemeClasses = (theme: string) => ({
   textPrimary: theme === "dark" ? "text-white" : "text-gray-900",
-  textSecondary: theme === "dark" ? "text-gray-400" : "text-gray-600",
+  textSecondary: theme === "dark" ? "text-gray-300" : "text-gray-600",
   borderColor: theme === "dark" ? "border-gray-700" : "border-gray-300",
   hoverBg: theme === "dark" ? "hover:bg-gray-800" : "hover:bg-gray-100",
 });
@@ -21,7 +21,7 @@ export const SimpleCard = (user: StoredUser) => {
       className={clsx(
         "group flex items-center gap-4 rounded-lg shadow-md px-5 py-3 w-fit transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5",
         theme === "dark"
-          ? "bg-slate-800 border border-slate-700 hover:border-primary/30"
+          ? "bg-neutral-800 border border-neutral-700 hover:border-primary/30"
           : "bg-white border border-gray-200 hover:border-primary/30"
       )}
     >

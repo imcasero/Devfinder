@@ -28,9 +28,9 @@ export const Seeker = ({ setSearchTerm }: SeekerProps) => {
         onSubmit={handleSubmit}
         className={clsx(
           "flex items-center gap-3 rounded-xl p-3 shadow-md transition-all duration-200",
-          isFocused && "ring-2 ring-primary/30 shadow-lg",
+          isFocused && "ring-2 ring-neutral-600/30 shadow-lg",
           theme === "dark"
-            ? "bg-slate-800 border border-slate-700"
+            ? "bg-neutral-900 border border-neutral-800"
             : "bg-white border border-gray-200"
         )}
         id="searchForm"
@@ -38,7 +38,7 @@ export const Seeker = ({ setSearchTerm }: SeekerProps) => {
         <Search
           className={clsx(
             "w-5 h-5 transition-colors duration-200",
-            isFocused ? "text-primary" : theme === "dark" ? "text-gray-400" : "text-gray-500"
+            isFocused ? "text-primary" : theme === "dark" ? "text-gray-300" : "text-gray-500"
           )}
         />
         <input
@@ -51,7 +51,7 @@ export const Seeker = ({ setSearchTerm }: SeekerProps) => {
           onBlur={() => setIsFocused(false)}
           className={clsx(
             "flex-grow bg-transparent outline-none px-2 text-sm font-medium placeholder:font-normal",
-            theme === "dark" ? "text-white placeholder:text-gray-500" : "text-gray-900 placeholder:text-gray-400"
+            theme === "dark" ? "text-white placeholder:text-gray-400" : "text-gray-900 placeholder:text-gray-400"
           )}
           placeholder="Search GitHub user..."
         />

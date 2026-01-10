@@ -12,7 +12,7 @@ export const ErrorCard = ({ message, statusCode }: ErrorCardProps) => {
   const { theme } = useTheme();
 
   const textSecondaryClass =
-    theme === "dark" ? "text-textSecondary-dark" : "text-textSecondary-light";
+    theme === "dark" ? "text-gray-300" : "text-gray-600";
 
   const errorTitle =
     statusCode === "404" ? "User Not Found" : "Unexpected Error";
@@ -26,7 +26,7 @@ export const ErrorCard = ({ message, statusCode }: ErrorCardProps) => {
       className={clsx(
         "w-full p-8 rounded-xl shadow-lg border flex flex-col gap-4 justify-center items-center animate-slide-up",
         theme === "dark"
-          ? "bg-slate-800 border-slate-700"
+          ? "bg-neutral-800 border-neutral-700"
           : "bg-white border-gray-200"
       )}
     >

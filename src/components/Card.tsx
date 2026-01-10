@@ -10,7 +10,7 @@ interface CardProps {
 
 const getThemeClasses = (theme: string) => ({
   textPrimary: theme === "dark" ? "text-white" : "text-gray-900",
-  textSecondary: theme === "dark" ? "text-gray-400" : "text-gray-600",
+  textSecondary: theme === "dark" ? "text-gray-300" : "text-gray-600",
   borderColor: theme === "dark" ? "border-gray-700" : "border-gray-300",
   locationBadge:
     theme === "dark"
@@ -35,7 +35,7 @@ export const Card = ({ userData }: CardProps) => {
       className={clsx(
         "w-full p-6 rounded-xl shadow-lg animate-slide-up transition-all duration-300 hover:shadow-xl",
         theme === "dark"
-          ? "bg-slate-800/95 border border-slate-700"
+          ? "bg-neutral-800/95 border border-neutral-700"
           : "bg-white border border-gray-200"
       )}
     >
@@ -71,7 +71,7 @@ export const Card = ({ userData }: CardProps) => {
             className={clsx(
               "text-center p-4 rounded-lg transition-all duration-200 hover:scale-105",
               theme === "dark"
-                ? "bg-slate-700/50 border border-slate-600/50"
+                ? "bg-neutral-700/50 border border-neutral-600/50"
                 : "bg-gray-50 border border-gray-200"
             )}
             key={key}
@@ -92,7 +92,7 @@ export const Card = ({ userData }: CardProps) => {
           className={clsx(
             "mt-5 inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg",
             theme === "dark"
-              ? "bg-slate-700/30 border border-slate-600/30"
+              ? "bg-neutral-700/30 border border-neutral-600/30"
               : "bg-gray-50 border border-gray-200"
           )}
         >
@@ -118,7 +118,7 @@ export const Card = ({ userData }: CardProps) => {
           className={clsx(
             "group flex-1 py-3 px-4 text-sm font-semibold rounded-lg border transition-all duration-200 hover:shadow-md",
             theme === "dark"
-              ? "bg-slate-700/50 border-slate-600 hover:bg-slate-700 text-white"
+              ? "bg-neutral-700/50 border-neutral-600 hover:bg-neutral-700 text-white"
               : "bg-white border-gray-300 hover:bg-gray-50 text-gray-900"
           )}
           onClick={copyToClipboard}

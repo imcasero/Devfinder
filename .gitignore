@@ -11,6 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
+*.tsbuildinfo
+
+# Regenerated locally by pnpm >= 10 for build-script approval; not needed on CI (pnpm 9)
+pnpm-workspace.yaml
 
 # Editor directories and files
 .vscode/*

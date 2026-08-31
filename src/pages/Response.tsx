@@ -1,15 +1,16 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getGithubUserByName } from "@lib/getUser.service";
-import { Seeker } from "@components/Seeker";
 import { Card } from "@components/Card";
 import { ErrorCard } from "@components/ErrorCard";
+import { Seeker } from "@components/Seeker";
 import { SkeletonCard } from "@components/SkeletonCard";
+import { getGithubUserByName } from "@lib/getUser.service";
 import { addUserToStorage, createStoredUser } from "@lib/storageUser.service";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import type { GithubUser } from "../interfaces/GithubUser";
 
 export const Response = () => {
   const { username } = useParams<{ username: string }>();
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<GithubUser | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [statusCode, setStatusCode] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -36,10 +37,11 @@ export const Response = () => {
             user.name ? user.name : ""
           );
           addUserToStorage(storedUser);
-        } catch (err: any) {
-          const code = err.message.match(/Error (\d+):/)?.[1];
+        } catch (err) {
+          const message = err instanceof Error ? err.message : "Unknown error";
+          const code = message.match(/Error (\d+):/)?.[1] ?? null;
           setStatusCode(code);
-          setError(err.message);
+          setError(message);
           setUserData(null);
         } finally {
           setLoading(false);

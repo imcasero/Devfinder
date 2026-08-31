@@ -1,7 +1,7 @@
 import { useTheme } from "@context/themeContext";
-import { Sun, Moon } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
+import { Moon, Sun } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export const Header: React.FC = () => {
   const { toggleTheme, theme } = useTheme();
@@ -9,7 +9,8 @@ export const Header: React.FC = () => {
 
   return (
     <header className="w-full flex justify-between items-center animate-slide-down mb-2">
-      <h1
+      <button
+        type="button"
         className={clsx(
           "font-bold text-2xl flex items-center cursor-pointer hover:opacity-80 transition-opacity",
           theme === "dark" ? "text-white" : "text-primary"
@@ -19,8 +20,9 @@ export const Header: React.FC = () => {
         }}
       >
         DevFinder
-      </h1>
+      </button>
       <button
+        type="button"
         className={clsx(
           "group flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 hover:scale-105",
           theme === "dark"

@@ -43,10 +43,16 @@ export const SkeletonCard = () => {
       {/* Bio Section */}
       <div className="space-y-2">
         <div
-          className={clsx("h-3 w-full rounded-md animate-pulse", skeletonBgClass)}
+          className={clsx(
+            "h-3 w-full rounded-md animate-pulse",
+            skeletonBgClass
+          )}
         ></div>
         <div
-          className={clsx("h-3 w-3/4 rounded-md animate-pulse", skeletonBgClass)}
+          className={clsx(
+            "h-3 w-3/4 rounded-md animate-pulse",
+            skeletonBgClass
+          )}
         ></div>
       </div>
 

@@ -1,7 +1,7 @@
-import { useTheme } from "@context/themeContext";
-import clsx from "clsx";
 import ErrorIcon from "@assets/Error.svg";
 import UserNotFoundIcon from "@assets/UserNotFound.svg";
+import { useTheme } from "@context/themeContext";
+import clsx from "clsx";
 
 interface ErrorCardProps {
   message: string;
@@ -38,16 +38,22 @@ export const ErrorCard = ({ message, statusCode }: ErrorCardProps) => {
             className="w-20 h-20 mb-4"
           />
         ) : (
-          <img
-            src={ErrorIcon}
-            alt="Error Icon"
-            className="w-20 h-20 mb-4"
-          />
+          <img src={ErrorIcon} alt="Error Icon" className="w-20 h-20 mb-4" />
         )}
-        <h2 className={clsx("text-xl font-bold mt-2", theme === "dark" ? "text-white" : "text-gray-900")}>
+        <h2
+          className={clsx(
+            "text-xl font-bold mt-2",
+            theme === "dark" ? "text-white" : "text-gray-900"
+          )}
+        >
           {errorTitle}
         </h2>
-        <p className={clsx("text-sm text-center mt-3 max-w-md leading-relaxed", textSecondaryClass)}>
+        <p
+          className={clsx(
+            "text-sm text-center mt-3 max-w-md leading-relaxed",
+            textSecondaryClass
+          )}
+        >
           {errorMessage}
         </p>
       </div>

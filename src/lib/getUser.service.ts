@@ -1,4 +1,4 @@
-import { GithubUser } from "../interfaces/GithubUser";
+import type { GithubUser } from "../interfaces/GithubUser";
 
 /**
  * Fetches GitHub user data by username from the GitHub API.

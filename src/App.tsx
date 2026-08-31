@@ -1,17 +1,17 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Outlet,
-} from "react-router-dom";
+import { Footer } from "@components/Footer";
 
 import { Header } from "@components/Header";
-import { Footer } from "@components/Footer";
 import { useTheme } from "@context/themeContext";
-import clsx from "clsx";
 import { Home } from "@pages/Home";
 import { Response } from "@pages/Response";
 import { Toaster } from "@pheralb/toast";
+import clsx from "clsx";
+import {
+  Outlet,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
 
 function Layout() {
   return (

@@ -1,10 +1,10 @@
 import { Seeker } from "@components/Seeker";
-import { useNavigate } from "react-router-dom";
-import { StoredUser } from "../interfaces/StoredUser";
-import { getStoredUsers } from "@lib/storageUser.service";
 import { SimpleCard } from "@components/SimpleCard";
 import { useTheme } from "@context/themeContext";
+import { getStoredUsers } from "@lib/storageUser.service";
 import clsx from "clsx";
+import { useNavigate } from "react-router-dom";
+import type { StoredUser } from "../interfaces/StoredUser";
 
 export const Home = () => {
   const navigate = useNavigate();

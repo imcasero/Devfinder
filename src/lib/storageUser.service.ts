@@ -1,4 +1,4 @@
-import { StoredUser } from "../interfaces/StoredUser";
+import type { StoredUser } from "../interfaces/StoredUser";
 
 // The key used to store recent GitHub users in localStorage.
 const LOCAL_STORAGE_KEY = "recentGithubUsers";

@@ -1,6 +1,6 @@
-import clsx from "clsx";
-import { StoredUser } from "../interfaces/StoredUser";
 import { useTheme } from "@context/themeContext";
+import clsx from "clsx";
+import type { StoredUser } from "../interfaces/StoredUser";
 
 const getThemeClasses = (theme: string) => ({
   textPrimary: theme === "dark" ? "text-white" : "text-gray-900",
@@ -11,8 +11,7 @@ const getThemeClasses = (theme: string) => ({
 
 export const SimpleCard = (user: StoredUser) => {
   const { theme } = useTheme();
-  const { textPrimary, textSecondary } =
-    getThemeClasses(theme);
+  const { textPrimary, textSecondary } = getThemeClasses(theme);
 
   return (
     <a
@@ -31,7 +30,12 @@ export const SimpleCard = (user: StoredUser) => {
         className="rounded-full w-12 h-12 object-cover ring-2 ring-primary/10 group-hover:ring-primary/30 transition-all duration-200"
       />
       <div>
-        <h3 className={clsx("font-semibold text-sm group-hover:text-primary transition-colors", textPrimary)}>
+        <h3
+          className={clsx(
+            "font-semibold text-sm group-hover:text-primary transition-colors",
+            textPrimary
+          )}
+        >
           {user.name}
         </h3>
         <p className={clsx("text-xs", textSecondary)}>@{user.login}</p>

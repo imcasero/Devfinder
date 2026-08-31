@@ -1,8 +1,8 @@
 import { useTheme } from "@context/themeContext";
-import clsx from "clsx";
-import { GithubUser } from "../interfaces/GithubUser";
-import { Copy, SquareArrowOutUpRight } from "lucide-react";
 import { toast } from "@pheralb/toast";
+import clsx from "clsx";
+import { Copy, SquareArrowOutUpRight } from "lucide-react";
+import type { GithubUser } from "../interfaces/GithubUser";
 
 interface CardProps {
   userData: GithubUser;
@@ -20,8 +20,7 @@ const getThemeClasses = (theme: string) => ({
 
 export const Card = ({ userData }: CardProps) => {
   const { theme } = useTheme();
-  const { textPrimary, textSecondary } =
-    getThemeClasses(theme);
+  const { textPrimary, textSecondary } = getThemeClasses(theme);
 
   const copyToClipboard = () => {
     navigator.clipboard
@@ -48,9 +47,7 @@ export const Card = ({ userData }: CardProps) => {
           />
         </div>
         <div className="flex flex-col">
-          <h2
-            className={clsx("text-xl font-bold leading-tight", textPrimary)}
-          >
+          <h2 className={clsx("text-xl font-bold leading-tight", textPrimary)}>
             {userData.name}
           </h2>
           <p className={clsx("text-sm font-medium", textSecondary)}>
@@ -77,7 +74,12 @@ export const Card = ({ userData }: CardProps) => {
             key={key}
             style={{ animationDelay: `${index * 50}ms` }}
           >
-            <h3 className={clsx("text-xs font-semibold uppercase tracking-wide mb-1", textSecondary)}>
+            <h3
+              className={clsx(
+                "text-xs font-semibold uppercase tracking-wide mb-1",
+                textSecondary
+              )}
+            >
               {key.replace("_", " ")}
             </h3>
             <p className={clsx("text-2xl font-bold text-primary")}>
@@ -110,11 +112,15 @@ export const Card = ({ userData }: CardProps) => {
         >
           <div className="flex justify-center items-center gap-2">
             <p>View Profile</p>
-            <SquareArrowOutUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <SquareArrowOutUpRight
+              size={16}
+              className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+            />
           </div>
         </a>
 
         <button
+          type="button"
           className={clsx(
             "group flex-1 py-3 px-4 text-sm font-semibold rounded-lg border transition-all duration-200 hover:shadow-md",
             theme === "dark"
@@ -124,7 +130,10 @@ export const Card = ({ userData }: CardProps) => {
           onClick={copyToClipboard}
         >
           <div className="flex justify-center items-center gap-2">
-            <Copy size={16} className="group-hover:scale-110 transition-transform" />
+            <Copy
+              size={16}
+              className="group-hover:scale-110 transition-transform"
+            />
             <p>Share</p>
           </div>
         </button>
